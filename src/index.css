@@ -91,16 +91,18 @@ p.error-message {
 }
 
 form {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   grid-template-columns: 1fr 3fr;
-  gap: 1.25vmin;
+  gap: 2.25vmin;
   color: var(--text-light);
+  align-items: center;
 }
 
 label {
   font-size: 2vmin;
   display: flex;
-  align-items: center;
+  justify-content: center;
 }
 
 input {
