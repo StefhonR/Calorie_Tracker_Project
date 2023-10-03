@@ -1,18 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import UserHealthForm from '../../components/UserHealthForm/UserHealthForm.jsx';
+import UserHealthDisplay from '../../components/UserHealthDisplay/UserHealthDisplay.jsx';
+import * as healthDataAPI from '../../utilities/healthData-api.js'
 
 
-function DashboardPage() {
+export default function DashboardPage() {
+  const [formData, setFormData] = useState(null);
+
+  useEffect(() => {
+
+    async function fetchHealthData() {
+      try {
+        const data = await healthDataAPI.getHealthData()
+        console.log(data)
+        setFormData(data)
+      } catch(err){
+        console.log(err)
+      }
+    }
+    fetchHealthData()
+
+  }, [])
+
   const handleSubmit = (formData) => {
-    console.log('Form Data:', formData);
-  }
+    setFormData(formData);
+  };
 
   return (
     <div>
       <h1>My Page</h1>
-      <UserHealthForm onSubmit={handleSubmit} />
+      {formData ? (
+        <UserHealthDisplay formData={formData} />
+      ) : (
+        <UserHealthForm onSubmit={handleSubmit} />
+      )}
     </div>
   )
 }
 
-export default DashboardPage

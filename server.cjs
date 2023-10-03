@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const ensureLoggedIn = require('./config/ensureLoggedIn.cjs');
 
 // Connect to database
 require('./config/database.cjs');
@@ -32,6 +33,8 @@ const userRouter = require('./routes/api/users.cjs');
 //Router setup
 // If the request starts with /api/users/ it directs the request to the userRouter (ln. 28)
 app.use('/api/users', userRouter);
+
+app.use('/api/healthData', ensureLoggedIn, require('./routes/api/healthData.cjs'));
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests

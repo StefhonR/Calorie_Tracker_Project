@@ -10,7 +10,6 @@ import { getUser } from '../../utilities/users-service'
 
 function App() {
   const [user, setUser] = useState(getUser())
- 
 
 
   return (
@@ -21,8 +20,8 @@ function App() {
             {/* NavBar and Routes are only available when the user is logged in */}
             <NavBar user={user} setUser={setUser} />
             <Routes>
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/orders" element={<OrderHistoryPage />} />
+              <Route path="/dashboard" element={<DashboardPage user={user} setUser={setUser} />} />
+              <Route path="/orders" element={<OrderHistoryPage user={user} setUser={setUser} />} />
             </Routes>
           </>
         :
