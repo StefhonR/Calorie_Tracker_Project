@@ -6,6 +6,10 @@ export function addData(formData) {
   return sendRequest(BASE_URL, 'POST', formData);
 }
 
+export function deleteData(formData) {
+  return sendRequest(`${BASE_URL}/delete`, 'DELETE', formData)
+}
+
 export function getHealthData() {
   return sendRequest(`${BASE_URL}/data`)
 }

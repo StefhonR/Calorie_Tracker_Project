@@ -7,7 +7,7 @@ const UserHealthForm = ({ onSubmit }) => {
     age: '',
     height: '',
     weight: '',
-    activityLevel: 'moderate',
+    activityLevel: 'light',
     goal: 'reduction'
   });
 
@@ -26,7 +26,7 @@ const UserHealthForm = ({ onSubmit }) => {
       // payload of the JSON Web Token (JWT)
       const data = await healthDataAPI.addData(formData);
       setFormData(data);
-      onSubmit(data);
+      onSubmit(data)
     } catch {
       setError('Form Invalid');
     }

@@ -2,7 +2,6 @@ const { Schema, model } = require('mongoose')
 
 const healthDataSchema = new Schema(
   {
-    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     gender: { type: String, required: true },
     age: { type: Number, required: true },
     height: { type: Number, required: true },

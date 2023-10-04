@@ -5,25 +5,33 @@ import * as healthDataAPI from '../../utilities/healthData-api.js'
 
 
 export default function DashboardPage() {
-  const [formData, setFormData] = useState(null);
+  const [formData, setFormData] = useState(() => {
+    const savedFormData = localStorage.getItem('formData');
+    return savedFormData ? JSON.parse(savedFormData) : null;
+  });
 
-  useEffect(() => {
+  const saveFormDataToLocalStorage = (formData) => {
+    localStorage.setItem('formData', JSON.stringify(formData));
+  };
 
-    async function fetchHealthData() {
-      try {
-        const data = await healthDataAPI.getHealthData()
-        console.log(data)
-        setFormData(data)
-      } catch(err){
-        console.log(err)
-      }
-    }
-    fetchHealthData()
+  // useEffect(() => {
 
-  }, [])
+  //   async function fetchHealthData() {
+  //     try {
+  //       const data = await healthDataAPI.getHealthData()
+  //       console.log(data)
+  //       setFormData(data)
+  //     } catch(err){
+  //       console.log(err)
+  //     }
+  //   }
+  //   fetchHealthData()
+
+  // }, [])
 
   const handleSubmit = (formData) => {
     setFormData(formData);
+    saveFormDataToLocalStorage(formData);
   };
 
   return (
